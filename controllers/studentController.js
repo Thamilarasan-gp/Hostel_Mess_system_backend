@@ -49,9 +49,20 @@ const getStudentCountUnderWarden = async (req, res) => {
   }
 };
 
+const getStudentDetails = async (req, res) => {
+  try {
+    const student = await Student.findById(req.params.id);
+    if (!student) {
+      return res.status(404).json({ success: false, message: "Student not found" });
+    }
+    res.status(200).json({ success: true, student });
+  } catch (error) {
+    console.error("Error fetching student details:", error);
+    res.status(500).json({ success: false, message: "Server error", error: error.message });
+  }
+};
 
-
-exports.scanQR = async (req, res) => {
+const scanQR = async (req, res) => {
   try {
     const { roll_number, qr_code } = req.body;
     const student = await Student.findOne({ roll_number });
@@ -72,4 +83,10 @@ exports.scanQR = async (req, res) => {
   }
 };
 
-module.exports = { getStudentsUnderWarden ,getStudentCountUnderWarden }; // ✅ Ensure it's correctly exporte
+// Use a single exports statement
+module.exports = { 
+  getStudentsUnderWarden, 
+  getStudentCountUnderWarden,
+  getStudentDetails,
+  scanQR 
+};

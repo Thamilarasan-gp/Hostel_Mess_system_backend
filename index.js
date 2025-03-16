@@ -12,17 +12,19 @@ const app = express();
 const authRoutes = require("./routes/authRoutes");
 const wardenRoutes = require("./routes/wardenRoutes");
 const studentRoutes = require("./routes/studentRoutes");
-const tokenRoutes = require("./routes/tokenRoutes");
+const scanRoutes = require("./routes/scanRoutes");
+const tokenRoutes = require('./routes/tokenRoutes'); // Ensure this is correct
 
 // Middleware
 app.use(express.json());
 app.use(cors());
 
-// Routes
+// Routes - Update route handlers to use the router objects correctly
 app.use("/api/auth", authRoutes);
 app.use("/api/warden", wardenRoutes);
 app.use("/api/student", studentRoutes);
 app.use("/api/token", tokenRoutes);
+app.use("/api/scan", scanRoutes);
 
 // MongoDB Connection
 const connectDB = async () => {
