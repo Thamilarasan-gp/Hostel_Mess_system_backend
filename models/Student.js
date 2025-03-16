@@ -34,6 +34,10 @@ const studentSchema = new mongoose.Schema({
     ref: "Warden",
     required: true
   },
+  password: {
+    type: String,
+    required: true
+  },
   login_token: {
     type: String,
     unique: true,

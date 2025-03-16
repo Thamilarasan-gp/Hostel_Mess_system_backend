@@ -11,7 +11,7 @@ exports.addStudent = async (req, res) => {
       return res.status(401).json({ message: "Unauthorized - Warden not found" });
     }
 
-    const { name, roll_number, department, year, block, room_number, phone } = req.body;
+    const { name, roll_number, department, year, block, room_number, phone,password } = req.body;
 
     // Create new student with warden reference
     const student = new Student({
@@ -23,6 +23,7 @@ exports.addStudent = async (req, res) => {
       room_number,
       phone,
       warden_id: wardenId,
+      password,
       login_token: `${roll_number}-${Date.now()}` // Generate unique login token
     });
 
